@@ -21,8 +21,7 @@ func _ready() -> void:
 	_game = get_tree().get_first_node_in_group("game")
 	# Don't grab the mouse during automated runs - stray cursor motion would
 	# swing the camera and silently corrupt the measurements.
-	if not _running_self_test():
-		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	# The start screen captures the mouse once the player clicks (browsers require a click).
 
 
 func _running_self_test() -> bool:
@@ -48,6 +47,15 @@ func _physics_process(delta: float) -> void:
 	var target := _target()
 	if target == null:
 		return
+
+	var pads := Input.get_connected_joypads()
+	if not pads.is_empty():
+		var rx := Input.get_joy_axis(pads[0], JOY_AXIS_RIGHT_X)
+		var ry := Input.get_joy_axis(pads[0], JOY_AXIS_RIGHT_Y)
+		if absf(rx) > 0.15:
+			yaw -= rx * 2.6 * delta
+		if absf(ry) > 0.15:
+			_pitch = clampf(_pitch - ry * 1.8 * delta, min_pitch, max_pitch)
 
 	var in_car := _game != null and _game.driving != null
 	var distance := car_distance if in_car else foot_distance

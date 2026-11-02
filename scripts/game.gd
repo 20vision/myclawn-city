@@ -19,6 +19,8 @@ func _ready() -> void:
 	# Cars sit in the world unattended until someone gets in.
 	for vehicle in get_tree().get_nodes_in_group("vehicle"):
 		vehicle.active = false
+	$Brand.ui = $EmpireUI
+	$EmpireUI.brand = $Brand
 
 
 func _unhandled_input(event: InputEvent) -> void:

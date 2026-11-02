@@ -105,6 +105,10 @@ func _build_block(gx: int, gz: int) -> void:
 	var from_centre := Vector2(gx - (GRID - 1) * 0.5, gz - (GRID - 1) * 0.5).length()
 	var downtown := clampf(1.0 - from_centre / (GRID * 0.6), 0.0, 1.0)
 
+	# The middle block belongs to the MyClawn tower (brand.gd).
+	if gx == GRID / 2 and gz == GRID / 2:
+		return
+
 	var pad := 2.0
 	var cell := (inner - pad * 3.0) * 0.5
 	for bx in 2:

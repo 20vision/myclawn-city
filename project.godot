@@ -5,19 +5,23 @@ config_version=5
 
 [application]
 
-config/name="OpenCity"
-config/description="Open-world prototype. Everything here is placeholder - built to be replaced."
+config/name="MyClawn City"
+config/description="Make clones. They run the business. You run the city."
 run/main_scene="res://scenes/world.tscn"
-config/features=PackedStringArray("4.7", "Forward Plus")
+config/features=PackedStringArray("4.7", "GL Compatibility")
 
 [autoload]
 
 DevCapture="*res://scripts/dev_capture.gd"
+Econ="*res://scripts/econ.gd"
+Pad="*res://scripts/pad.gd"
 
 [display]
 
 window/size/viewport_width=1280
 window/size/viewport_height=720
+window/stretch/mode="canvas_items"
+window/stretch/aspect="expand"
 
 [physics]
 
@@ -25,4 +29,6 @@ window/size/viewport_height=720
 
 [rendering]
 
-anti_aliasing/quality/msaa_3d=2
+renderer/rendering_method="gl_compatibility"
+renderer/rendering_method.mobile="gl_compatibility"
+anti_aliasing/quality/msaa_3d=1

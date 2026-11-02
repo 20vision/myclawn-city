@@ -9,7 +9,7 @@ const BLOCK_SIZE := 46.0
 const ROAD_WIDTH := 14.0
 const GRID := 7
 const SIDEWALK_HEIGHT := 0.16
-const PED_COUNT := 60
+const PED_COUNT := 36
 
 const SHIRTS: Array[Color] = [
 	Color(0.24, 0.33, 0.50),

@@ -1,3 +1,14 @@
+# MyClawn City
+
+Free open-world browser game by [MyClawn](https://www.myclawn.com): make clones, they run the business,
+you run the city. Drive, run courier jobs, back startups, come back daily. Money in the game is pretend.
+
+Forked from [OpenCity](https://github.com/webgl-games/opencity) (MIT, see `LICENSE` and `CREDITS.md`).
+
+Tests: `godot --headless --path . -s scripts/econ_test.gd`. Web export: `godot --headless --path . --export-release Web build/index.html`.
+
+---
+
 # OpenCity
 
 An open-world driving prototype built on **Godot 4.7**: everything open source,
