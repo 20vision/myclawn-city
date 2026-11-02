@@ -184,7 +184,8 @@ func _ring(pos: Vector3, color: Color, label: String) -> Node3D:
 	root.add_child(beam)
 	add_child(root)
 	if label != "":
-		var l := _text(label, pos + Vector3(0, 6, 0), 0.03, color, true)
+		var l := _text(label, pos + Vector3(0, 9, 0), 0.016, color, true)
+		l.no_depth_test = false
 		root.set_meta("label", l)
 	return root
 
@@ -198,6 +199,16 @@ func _clawn(pos: Vector3) -> Node3D:
 	n.material_override = _emissive(GOLD, 2.0)
 	n.position = pos + Vector3(0, 0.5, 0)
 	add_child(n)
+	# A thin light above the rooftops, so a hidden Clawn can be hunted from a distance.
+	var ray := MeshInstance3D.new()
+	var c := CylinderMesh.new()
+	c.top_radius = 0.22
+	c.bottom_radius = 0.22
+	c.height = 140.0
+	ray.mesh = c
+	ray.position.y = 70.0
+	ray.material_override = n.material_override
+	n.add_child(ray)
 	return n
 
 
@@ -212,7 +223,15 @@ func _spawn_drop() -> void:
 func start_job() -> void:
 	job_active = true
 	job_left = 3
+	_show_rings(false)
 	_next_checkpoint()
+
+
+func _show_rings(on: bool) -> void:
+	for ring in _rings:
+		ring.visible = on
+		if ring.has_meta("label"):
+			ring.get_meta("label").visible = on
 
 
 func _next_checkpoint() -> void:
@@ -235,6 +254,7 @@ func _next_checkpoint() -> void:
 func _end_job(success: bool) -> void:
 	job_active = false
 	_beam.visible = false
+	_show_rings(true)
 	var pay := Econ.finish_job(success)
 	if success:
 		ui.toast("Job done! +%s   chain x%d" % [Econ.money(pay), Econ.s.job_chain])
