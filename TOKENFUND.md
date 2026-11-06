@@ -1,6 +1,7 @@
 # MyClawn City
 Vision: A free open-world browser game where your clones run the business and you run the city.
 Image: screenshots/drive.png
+Chat: https://discord.gg/spUZ8ruSDJ
 
 A Godot 4.7 game, MIT licensed. Money in the game is pretend.
 
